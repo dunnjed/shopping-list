@@ -20,7 +20,6 @@ export interface ShoppingItem {
 export class ListItemComponent implements OnInit, OnDestroy {
 
   @Input() shoppingItem: ShoppingItem;
-  subscription: Subscription;
 
   constructor(private shoppingData: ShoppingDataService) { }
 
@@ -28,26 +27,17 @@ export class ListItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   deleteItem() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    this.subscription = this.shoppingData.deleteItem(this.shoppingItem._id).subscribe();
+    this.shoppingData.deleteItem(this.shoppingItem._id).subscribe();
   }
 
   updateItem({quantity, itemName, price}: Partial<ShoppingItem>) {
 
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
     this.shoppingItem.quantity = quantity;
     this.shoppingItem.itemName = itemName;
     this.shoppingItem.price = price;
-    this.subscription = this.shoppingData.updateItem(this.shoppingItem).subscribe();
+    this.shoppingData.updateItem(this.shoppingItem).subscribe();
   }
 }

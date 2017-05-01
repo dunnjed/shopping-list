@@ -1,3 +1,4 @@
+import { ShoppingItem } from './list-item/list-item.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingDataService } from './shopping-data.service';
@@ -10,8 +11,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'app works!';
-  shoppingList: Observable<any>;
-  subscription: Subscription;
+  shoppingList: Observable<ShoppingItem[]>;
 
   constructor(private shoppingData: ShoppingDataService) {
 
@@ -22,16 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   addItem() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    this.subscription = this.shoppingData
+    this.shoppingData
       .addItem({ quantity: 1, itemName: 'item', price: 0 })
       .subscribe();
   }
