@@ -1,0 +1,14 @@
+
+<div>
+<md-input-container>
+   <input #quantity mdInput placeholder="Qty" [disabled]=false [value]="shoppingItem.quantity">
+</md-input-container>
+<md-input-container>
+   <input #item mdInput placeholder="Item" [disabled]=false [value]="shoppingItem.itemName">
+</md-input-container>
+<md-input-container>
+   <input #price mdInput placeholder="Price" [disabled]=false [value]="shoppingItem.price">
+</md-input-container>
+<button (click)="updateItem({quantity: quantity.value, itemName: item.value, price: price.value})" md-button [color]="'primary'">Update</button>
+<button (click)="deleteItem()" md-button [color]="'primary'">X</button>
+</div>
