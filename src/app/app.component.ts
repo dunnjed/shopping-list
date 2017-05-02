@@ -12,6 +12,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'app works!';
   shoppingList: Observable<ShoppingItem[]>;
+  _shoppingList: ShoppingItem[];
 
   constructor(private shoppingData: ShoppingDataService) {
 
