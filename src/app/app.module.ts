@@ -1,3 +1,4 @@
+import { ShoppingDataLocalStoreService } from './services/shopping-data-local-store.service';
 import { ShoppingDataService } from './shopping-data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,10 @@ import { ListItemComponent } from './list-item/list-item.component';
     MdButtonModule,
     MdInputModule
   ],
-  providers: [ShoppingDataService],
+  providers: [
+    ShoppingDataService,
+    ShoppingDataLocalStoreService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
