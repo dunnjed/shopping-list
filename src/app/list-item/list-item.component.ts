@@ -1,15 +1,16 @@
+import { ShoppingDataLocalStoreService } from './../services/shopping-data-local-store.service';
 import { ShoppingDataService } from './../shopping-data.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import {Http, RequestOptions} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { Http, RequestOptions } from '@angular/http';
 
 export interface ShoppingItem {
-    itemName: string;
-    quantity: number;
-    price: number;
-    _id?: string;
-    createdAt?: string;
+  itemName: string;
+  quantity: number;
+  price: number;
+  _id?: string;
+  createdAt?: string;
 };
 
 @Component({
@@ -20,8 +21,10 @@ export interface ShoppingItem {
 export class ListItemComponent implements OnInit, OnDestroy {
 
   @Input() shoppingItem: ShoppingItem;
+  @Input() index: number;
 
-  constructor(private shoppingData: ShoppingDataService) { }
+  constructor(private shoppingData: ShoppingDataService,
+    private localStore: ShoppingDataLocalStoreService) { }
 
   ngOnInit() {
   }
@@ -30,10 +33,10 @@ export class ListItemComponent implements OnInit, OnDestroy {
   }
 
   deleteItem() {
-    this.shoppingData.deleteItem(this.shoppingItem._id).subscribe();
+    this.localStore.deleteItem(this.shoppingItem._id, this.index);
   }
 
-  updateItem({quantity, itemName, price}: Partial<ShoppingItem>) {
+  updateItem({ quantity, itemName, price }: Partial<ShoppingItem>) {
 
     this.shoppingItem.quantity = quantity;
     this.shoppingItem.itemName = itemName;

@@ -1,6 +1,6 @@
 <h1>
   Shopping List
 </h1>
-<div>Total Price: </div>
+<div>Total Price: {{totalPrice}}</div>
 <button (click)="addItem()" md-button [color]="'primary'">Add Item</button>
-<app-list-item *ngFor="let item of shoppingList | async" [shoppingItem]="item"></app-list-item>
+<app-list-item *ngFor="let item of shoppingList | async; let i = index" [shoppingItem]="item" [index]="i"></app-list-item>
